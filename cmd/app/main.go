@@ -18,10 +18,10 @@ func main() {
 
 	lbInstance, err := lb.New(cfg.Backends, nil)
 	if err != nil {
-		log.Fatalf("failed to create load balancer: %v", err)
+		log.WithError(err).Fatal("failed to create load balancer")
 	}
 
 	if err := server.Run(cfg.Port, lbInstance); err != nil {
-		log.Fatalf("server exited with error: %v", err)
+		log.WithError(err).Fatal("server exited with error")
 	}
 }
